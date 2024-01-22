@@ -1,0 +1,118 @@
+#include<iostream>
+#include<fstream>
+
+#include<string>
+
+using namespace std;
+
+
+void reverse(std::string file){
+
+	std::string reverse = "CSC450-mod5-reverse.txt";
+	std::ifstream fileName;
+	std::string line;
+
+	fileName.open(file);
+	std::ofstream f;
+	f.open(reverse, ios::app);
+	while(!fileName.eof()){
+	//	fileName >> line;
+		std::getline(fileName, line);
+		f << line + "\n";
+}
+
+f.close();
+fileName.close();
+
+
+}
+
+void getFile(string fileName){
+	std::ifstream file(fileName);
+	std::string line;
+
+
+
+	while(std::getline(file, line)){
+		std::cout<< line <<endl;
+	}
+
+
+
+
+	file.close();
+}
+
+void clearFileContent(std::string fileName){
+std::ofstream file;
+
+
+file.open(fileName, ios::out);
+if(file.is_open()){
+
+while(file.eof()){
+	//file << " ";
+}
+std::cout << fileName + ": All content has been deleted"<<endl;
+}else {
+
+	std::cout << "Unable to open file " + fileName<<endl;
+}
+
+file.close();
+
+
+}
+
+void writeToFile(std::string fileName){
+	std::string input;
+	std::cout<< "Enter a string of information you wish to append to the text doc:  "<<endl;
+	getline(cin, input);
+
+	std::ofstream file(fileName, file.app);
+
+	file<<+ "\n"+ input;
+		file.close();
+
+
+
+}
+int main(){
+
+
+bool end = false;
+std::string data;
+std::string fileName;
+int response;
+fileName = "CSC450_CT5_mod5.txt";
+writeToFile(fileName);
+
+while(end == false){
+	std::cout<<" "<<endl;
+std::cout<< "Enter a command: "<<endl;
+std::cout<< "1 - view file"<<endl;
+std::cout<< "2 - clear file"<<endl;
+std::cout<< "3 - end program"<<endl;
+
+cin >> response;
+
+
+if(response == 1){
+	getFile(fileName);
+}else if(response == 2){
+	reverse(fileName);
+	clearFileContent(fileName);
+}else if(response == 3){
+	end = true;
+}
+else {
+	std::cout<<"Invalid response"<<endl;
+	end = true;
+}
+}
+
+
+std::cout<<"Program ended"<<endl;
+
+	return 1;
+}
